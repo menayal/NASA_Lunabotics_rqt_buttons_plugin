@@ -13,10 +13,7 @@ class MyPlugin(Plugin):
         # Give QObjects reasonable names
         self.setObjectName('MyPlugin')
 
-        #trying
-        #lbl = QLabel("testing", self)
-
-        # Process standalone plugin command-line arguments
+          # Process standalone plugin command-line arguments
         from argparse import ArgumentParser
         parser = ArgumentParser()
         # Add argument(s) to the parser.
@@ -31,8 +28,7 @@ class MyPlugin(Plugin):
         # Create QWidget
         self._widget = QWidget()
         # Get path to UI file which should be in the "resource" folder of this package
-        ui_file = os.path.join(rospkg.RosPack().get_path('rqt_mypkg'), 'resource', 'MyPlugin_1.ui')
-        #ui_file = os.path.join(rospkg.RosPack().get_path('rqt_mypkg'), 'resource', 'MyPlugin_1.ui')
+        ui_file = os.path.join(rospkg.RosPack().get_path('rqt_mypkg'), 'resource', 'ThreeButtons.ui')
 
         # Extend the widget with all attributes and children from UI file
         loadUi(ui_file, self._widget)
@@ -47,28 +43,25 @@ class MyPlugin(Plugin):
             self._widget.setWindowTitle(self._widget.windowTitle() + (' (%d)' % context.serial_number()))
         # Add widget to the user interface
         context.add_widget(self._widget)
-        #testing here
-        #context.add_widget(QPushButton('Top'))
-        #label = QLabel('Hello World!')
-        #label.show()
-
-        #buttons 
+     
+        #link buttons to functions. 
         self._widget.pushButton_Manual.clicked.connect(self.manualControl)
         self._widget.pushButton_Autonomy.clicked.connect(self.autonomy)
         self._widget.pushButton_STOP.clicked.connect(self.stop)
 
+    #functions to control the robot. 
     def manualControl(self):
-        print("manual control initiated!")
+        print("Manual control initiated!")
         #keyboard input, make it open in a new terminal?
         os.system("rosrun teleop_twist_keyboard teleop_twist_keyboard.py cmd_vel:=/new_robot_urdf_diff_drive_controller/cmd_vel")
         #add button/interface for the controller 
+   
     def autonomy(self):
         print("autonomous control initiated!")
+   
     def stop(self):
         print("STOP process initiated!")
         #will need to publish some geo twist messages here to stop from driving
-    def taskStart(self):
-        print("Starting")
 
     def shutdown_plugin(self):
         # TODO unregister all publishers here
