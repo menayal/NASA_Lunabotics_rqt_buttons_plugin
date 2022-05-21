@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1103</width>
+    <height>542</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QPushButton" name="pushButton_Manual">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>30</y>
+     <width>401</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Manual Movement</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_Autonomy">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>100</y>
+     <width>401</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Autonomous Movement</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_STOP">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>170</y>
+     <width>401</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>STOP</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="QLabel_positionEncoder1">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>270</y>
+     <width>201</width>
+     <height>34</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="positionEncoder1">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>270</y>
+     <width>281</width>
+     <height>34</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Position Encoder #1:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="positionEncoder2">
+   <property name="geometry">
+    <rect>
+     <x>520</x>
+     <y>270</y>
+     <width>291</width>
+     <height>34</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Position Encoder #2:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="QLabel_positionEncoder2">
+   <property name="geometry">
+    <rect>
+     <x>860</x>
+     <y>270</y>
+     <width>321</width>
+     <height>34</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="tempAugerMotor">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>320</y>
+     <width>281</width>
+     <height>34</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Temp. Auger Motor:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="QLabel_tempAugerMotor">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>320</y>
+     <width>201</width>
+     <height>34</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="QLabel_currentAugerMotor">
+   <property name="geometry">
+    <rect>
+     <x>860</x>
+     <y>320</y>
+     <width>321</width>
+     <height>34</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="currentAugerMotor">
+   <property name="geometry">
+    <rect>
+     <x>520</x>
+     <y>320</y>
+     <width>331</width>
+     <height>34</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Current of Auger Motor:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="velocityAugerMotor">
+   <property name="geometry">
+    <rect>
+     <x>520</x>
+     <y>370</y>
+     <width>331</width>
+     <height>34</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Velocity of Auger Motor:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="QLabel_velocityAugerMotor">
+   <property name="geometry">
+    <rect>
+     <x>860</x>
+     <y>370</y>
+     <width>321</width>
+     <height>34</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="batteryVoltage">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>370</y>
+     <width>321</width>
+     <height>34</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Battery Voltage:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="QLabel_batteryVoltage">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>370</y>
+     <width>201</width>
+     <height>34</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
