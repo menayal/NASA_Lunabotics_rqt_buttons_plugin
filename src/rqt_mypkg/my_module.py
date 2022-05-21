@@ -4,7 +4,10 @@ import rospkg
 
 from qt_gui.plugin import Plugin
 from python_qt_binding import loadUi
-from python_qt_binding.QtWidgets import QWidget, QLabel, QDockWidget
+from python_qt_binding.QtWidgets import QWidget, QLabel, QDockWidget 
+import time
+#from posEncoder import PositionEncoder  
+#rom datetime import datetime
 
 class MyPlugin(Plugin):
 
@@ -28,7 +31,7 @@ class MyPlugin(Plugin):
         # Create QWidget
         self._widget = QWidget()
         # Get path to UI file which should be in the "resource" folder of this package
-        ui_file = os.path.join(rospkg.RosPack().get_path('rqt_mypkg'), 'resource', 'ThreeButtons.ui')
+        ui_file = os.path.join(rospkg.RosPack().get_path('rqt_mypkg'), 'resource', 'ThreeButtonsWithLabels.ui')
 
         # Extend the widget with all attributes and children from UI file
         loadUi(ui_file, self._widget)
@@ -49,18 +52,54 @@ class MyPlugin(Plugin):
         self._widget.pushButton_Autonomy.clicked.connect(self.autonomy)
         self._widget.pushButton_STOP.clicked.connect(self.stop)
 
+        #create obj for subscriber
+        # sampleSub = PositionEncoder()
+        #now = datetime.now()
+        #current_time = now.strftime("%H:%M:%S")
+
+        #get the position encoder values
+        #self._widget.QLabel_positionEncoder1.setText(self.getPositionEncoder1())
+        #self.getPositionEncoder1()
+        #while True:
+            # self._widget.QLabel_positionEncoder1.setText(str(sampleSub.listener()))
+            #self._widget.QLabel_positionEncoder1.setText(current_time)
+
+        self._widget.QLabel_positionEncoder2.setText(self.getPositionEncoder2())
+        self._widget.QLabel_tempAugerMotor.setText(self.getTempAugerMotor())
+        self._widget.QLabel_currentAugerMotor.setText(self.getCurrentAugerMotor())
+        self._widget.QLabel_batteryVoltage.setText(self.getBatteryVoltage())
+        self._widget.QLabel_velocityAugerMotor.setText(self.getVelocityAugerMotor())
+        #self.textEdit.setPlainText("Hello PyQt5!\nfrom pythonpyqt.com")
+
+
+        
+    #functions to get the encoder values
+   #def getPositionEncoder1(self):
+    #    self._widget.QLabel_positionEncoder1.setText("from funct")
+    def getPositionEncoder2(self):
+        return "pos enc 2.."
+    def getTempAugerMotor(self):
+        return "temp.."
+    def getCurrentAugerMotor(self):
+        return "current.."
+    def getBatteryVoltage(self):
+        return "voltage.."
+    def getVelocityAugerMotor(self):
+        return "velo.."
     #functions to control the robot. 
     def manualControl(self):
         print("Manual control initiated!")
         #keyboard input, make it open in a new terminal?
         os.system("rosrun teleop_twist_keyboard teleop_twist_keyboard.py cmd_vel:=/new_robot_urdf_diff_drive_controller/cmd_vel")
         #add button/interface for the controller 
-   
+    
     def autonomy(self):
         print("autonomous control initiated!")
    
     def stop(self):
         print("STOP process initiated!")
+        self._widget.QLabel_positionEncoder1.setText("STOPPPED")
+
         #will need to publish some geo twist messages here to stop from driving
 
     def shutdown_plugin(self):
