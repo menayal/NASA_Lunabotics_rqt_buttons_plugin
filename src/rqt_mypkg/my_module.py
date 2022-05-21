@@ -8,6 +8,8 @@ from python_qt_binding.QtWidgets import QWidget, QLabel, QDockWidget
 import time
 #from posEncoder import PositionEncoder  
 #rom datetime import datetime
+from trying import send
+from python_qt_binding.QtCore import QTimer,QDateTime
 
 class MyPlugin(Plugin):
 
@@ -62,7 +64,16 @@ class MyPlugin(Plugin):
         #self.getPositionEncoder1()
         #while True:
             # self._widget.QLabel_positionEncoder1.setText(str(sampleSub.listener()))
-            #self._widget.QLabel_positionEncoder1.setText(current_time)
+            #self._widget.QLabel_positionEncoder1.setText("1")
+        
+        #testing out qTimer
+        self.timer=QTimer()
+
+        self.timer.timeout.connect(self.showTime)
+        self.timer.start(1000)
+
+
+        self._widget.QLabel_positionEncoder1.setText(send())
 
         self._widget.QLabel_positionEncoder2.setText(self.getPositionEncoder2())
         self._widget.QLabel_tempAugerMotor.setText(self.getTempAugerMotor())
@@ -71,8 +82,12 @@ class MyPlugin(Plugin):
         self._widget.QLabel_velocityAugerMotor.setText(self.getVelocityAugerMotor())
         #self.textEdit.setPlainText("Hello PyQt5!\nfrom pythonpyqt.com")
 
-
-        
+    #updatin the time here
+    def showTime(self):
+        time=QDateTime.currentDateTime()
+        timeDisplay=time.toString('mm:ss dddd')
+        self._widget.QLabel_positionEncoder1.setText(timeDisplay)
+    
     #functions to get the encoder values
    #def getPositionEncoder1(self):
     #    self._widget.QLabel_positionEncoder1.setText("from funct")
@@ -98,6 +113,7 @@ class MyPlugin(Plugin):
    
     def stop(self):
         print("STOP process initiated!")
+        self.timer.stop()
         self._widget.QLabel_positionEncoder1.setText("STOPPPED")
 
         #will need to publish some geo twist messages here to stop from driving
