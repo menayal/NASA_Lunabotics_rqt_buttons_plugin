@@ -8,7 +8,6 @@ from python_qt_binding.QtWidgets import QWidget, QLabel, QDockWidget
 import time
 #from posEncoder import PositionEncoder  
 #rom datetime import datetime
-from trying import send
 from python_qt_binding.QtCore import QTimer,QDateTime
 
 class MyPlugin(Plugin):
@@ -68,12 +67,11 @@ class MyPlugin(Plugin):
         
         #testing out qTimer
         self.timer=QTimer()
-
+        #starts show time function
         self.timer.timeout.connect(self.showTime)
+
+        #refreshes every millisecond
         self.timer.start(1000)
-
-
-        self._widget.QLabel_positionEncoder1.setText(send())
 
         self._widget.QLabel_positionEncoder2.setText(self.getPositionEncoder2())
         self._widget.QLabel_tempAugerMotor.setText(self.getTempAugerMotor())
@@ -136,4 +134,3 @@ class MyPlugin(Plugin):
         # Comment in to signal that the plugin has a way to configure
         # This will enable a setting button (gear icon) in each dock widget title bar
         # Usually used to open a modal configuration dialog
-
