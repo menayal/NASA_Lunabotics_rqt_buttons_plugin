@@ -32,7 +32,7 @@ class MyPlugin(Plugin):
         # Create QWidget
         self._widget = QWidget()
         # Get path to UI file which should be in the "resource" folder of this package
-        ui_file = os.path.join(rospkg.RosPack().get_path('rqt_mypkg'), 'resource', 'ThreeButtonsWithLabels.ui')
+        ui_file = os.path.join(rospkg.RosPack().get_path('rqt_mypkg'), 'resource', 'Start_Stop_Cameras.ui')
 
         # Extend the widget with all attributes and children from UI file
         loadUi(ui_file, self._widget)
@@ -49,56 +49,12 @@ class MyPlugin(Plugin):
         context.add_widget(self._widget)
      
         #link buttons to functions. 
-        self._widget.pushButton_Manual.clicked.connect(self.manualControl)
-        self._widget.pushButton_Autonomy.clicked.connect(self.autonomy)
-        self._widget.pushButton_STOP.clicked.connect(self.stop)
+        self._widget.pushButton_StartFrontCamera.clicked.connect(self.startFrontCamera)
+        self._widget.pushButton_StopFrontCamera.clicked.connect(self.stopFrontCamera)
+        self._widget.pushButton_StartBackCamera.clicked.connect(self.startBackCamra)
+        self._widget.pushButton_StopBackCamera.clicked.connect(self.stopBackCamera)
 
-        #create obj for subscriber
-        # sampleSub = PositionEncoder()
-        #now = datetime.now()
-        #current_time = now.strftime("%H:%M:%S")
-
-        #get the position encoder values
-        #self._widget.QLabel_positionEncoder1.setText(self.getPositionEncoder1())
-        #self.getPositionEncoder1()
-        #while True:
-            # self._widget.QLabel_positionEncoder1.setText(str(sampleSub.listener()))
-            #self._widget.QLabel_positionEncoder1.setText("1")
-        
-        #testing out qTimer
-        self.timer=QTimer()
-        #starts show time function
-        self.timer.timeout.connect(self.showTime)
-
-        #refreshes every millisecond
-        self.timer.start(1000)
-
-        self._widget.QLabel_positionEncoder2.setText(self.getPositionEncoder2())
-        self._widget.QLabel_tempAugerMotor.setText(self.getTempAugerMotor())
-        self._widget.QLabel_currentAugerMotor.setText(self.getCurrentAugerMotor())
-        self._widget.QLabel_batteryVoltage.setText(self.getBatteryVoltage())
-        self._widget.QLabel_velocityAugerMotor.setText(self.getVelocityAugerMotor())
-        #self.textEdit.setPlainText("Hello PyQt5!\nfrom pythonpyqt.com")
-
-    #updatin the time here
-    def showTime(self):
-        time=QDateTime.currentDateTime()
-        timeDisplay=time.toString('mm:ss dddd')
-        self._widget.QLabel_positionEncoder1.setText(timeDisplay)
     
-    #functions to get the encoder values
-   #def getPositionEncoder1(self):
-    #    self._widget.QLabel_positionEncoder1.setText("from funct")
-    def getPositionEncoder2(self):
-        return "pos enc 2.."
-    def getTempAugerMotor(self):
-        return "temp.."
-    def getCurrentAugerMotor(self):
-        return "current.."
-    def getBatteryVoltage(self):
-        return "voltage.."
-    def getVelocityAugerMotor(self):
-        return "velo.."
     #functions to control the robot. 
     def manualControl(self):
         print("Manual control initiated!")
@@ -106,16 +62,57 @@ class MyPlugin(Plugin):
         os.system("rosrun teleop_twist_keyboard teleop_twist_keyboard.py cmd_vel:=/new_robot_urdf_diff_drive_controller/cmd_vel")
         #add button/interface for the controller 
     
-    def autonomy(self):
-        print("autonomous control initiated!")
+    def startFrontCamera(self):
+        print("The front camera is being launched...")
+        #os.system("bash runJoy.sh") #needed to be in dir to run
+
+        #runs file from root dir
+        BASE_DIR = os.path.dirname(os.path.realpath(__file__))
+        DATA_PATH = os.path.join(BASE_DIR, "usb_cam0.launch")
+        os.system("roslaunch usb_cam usb_cam0.launch")
+
+        rospy.loginfo("Front Camera STARTED!")
+        #print("Front Camera STARTED!")
+    def stopFrontCamera(self):
+        print("The front camera is being stopped...")
+        #os.system("bash runJoy.sh") #needed to be in dir to run
+
+        #runs file from root dir
+        BASE_DIR = os.path.dirname(os.path.realpath(__file__))
+        DATA_PATH = os.path.join(BASE_DIR, "kill_usb_cam0.sh")
+        #print(str(BASE_DIR))
+        #print(str(DATA_PATH))
+        #os.system("bash /home/nayal/nasa_ws/src/rqt_mypkg/src/rqt_mypkg/kill_usb_cam0.sh")
+        #print("bash " + str(DATA_PATH))
+        os.system("bash " + str(DATA_PATH))
+        
+        #os.system()
+        rospy.loginfo("Front Camera STOPPED!")
+        #print("Front Camera STOPPED!")
+    def startBackCamra(self):
+        print("The back camera is being launched...")
+        #os.system("bash runJoy.sh") #needed to be in dir to run
+
+        #runs file from root dir
+        BASE_DIR = os.path.dirname(os.path.realpath(__file__))
+        DATA_PATH = os.path.join(BASE_DIR, "usb_cam1.launch")
+        os.system("roslaunch usb_cam usb_cam1.launch")
+
+        rospy.loginfo("Back camera STARTED!")
+        #print("Back camera STARTED!")
+    def stopBackCamera(self):
+        print("The stop camera is being launched...")
+        #os.system("bash runJoy.sh") #needed to be in dir to run
+
+        #runs file from root dir
+        BASE_DIR = os.path.dirname(os.path.realpath(__file__))
+        DATA_PATH = os.path.join(BASE_DIR, "kill_usb_cam1.sh")
+        #os.system("bash /home/nayal/nasa_ws/src/rqt_mypkg/src/rqt_mypkg/kill_usb_cam1.sh")
+        os.system("bash " + str(DATA_PATH))
+        
+        rospy.loginfo("Back camera STOPPED!") 
+        #print("Back camera STOPPED!")            
    
-    def stop(self):
-        print("STOP process initiated!")
-        self.timer.stop()
-        self._widget.QLabel_positionEncoder1.setText("STOPPPED")
-
-        #will need to publish some geo twist messages here to stop from driving
-
     def shutdown_plugin(self):
         # TODO unregister all publishers here
         pass
